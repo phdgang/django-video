@@ -1,0 +1,14 @@
+.container { width: 950px; margin: 0 auto; }
+.column { float: left; margin-right: 10px; }
+.span-5 { width: 190px; }
+.last { margin-right: 0; }
+.span-19 { width: 750px; }
+.span-17 { width: 670px; }
+.span-7 { width: 270px; }
+.span-21 { width: 835px; }
+.span-3 { width: 105px; }
+#logo h1 { font-size:14px; font-style:italic; margin-left:5px;}
+#header,#footer { background-color:#CCCCFF;}
+.sidebar img { margin-top:10px; border:solid 1px #999999; }
+#newvideo { border:1px solid #888888; float:right; padding-left:5px; }
+#newvideo p, #newvideo label, #newvideo input { float: left; margin-right:10px;}

@@ -1,0 +1,54 @@
+{% load thumbnails %}
+
+<table>
+  <tr><td>
+      <a  
+	 style="display:block;width:{{ width }}px;height:{{ height }}px"  
+	 id="player">
+	{% if not video.url %}
+	<img src="/static/images/not_available.jpg" alt="Video is not available yet" height={{ height }} width={{ width }}/>
+	{% endif %}
+      </a>
+  </td></tr>
+
+  {% if thumbnails %}
+  {% if video.has_thumbnails %}
+  <tr><td>
+      {% thumbnails video player="player" width=width %}
+  </td></tr>
+  {% endif %}
+  {% endif %}
+</table>
+
+<script>
+  player = flowplayer("player", "/yvideo/flowplayer/flowplayer-3.0.0-rc2.swf", {
+
+                      clip: {
+                          {% if video.url %}
+                          url: "{{ video.url }}",
+                          {% endif %}
+                          {% if autoplay %}
+                          autoPlay: true,
+                          {% else %}
+                          autoPlay: false,
+                          {% endif %}
+                      },
+                      onFinish: function() {
+                          {% if loop %}
+  
+                          this.play();
+  
+                          {% else %}
+  
+                          this.stop();
+  
+                          {% endif %}
+                      },
+                      onLoad: function() {
+                          this.setVolume({{ volume }});
+                          {% if mute %}
+                          this.mute();
+                          {% endif %}
+                      }
+                      });
+</script>

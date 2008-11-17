@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load player webdesign preview%}
+
+{% block content %}
+<h2>{% lorem 4 w random %} </h2>
+{% lorem 1 p random %}
+{% player video width=640 height=480 volume=10 thumbnails=True %}
+{% lorem 2 p random %}
+{% endblock %}
+
+{% block sidebar %}
+<h3>All videos</h3>
+{% for video in videos %}
+<a href="?video={{ video.id }}">{% preview video "40%" %}</a>
+{% endfor %}
+{% endblock %}

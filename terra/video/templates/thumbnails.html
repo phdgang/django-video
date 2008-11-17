@@ -1,0 +1,24 @@
+<div id="thumbnails" style="display:block;width:{{ width }}px;height:{{ thumbnails.height }}px;overflow:scroll">
+  <table>
+    <tr>
+      {% for thumbnail in video.thumbnails.ordered_by_time %}
+      <td>
+	<img src="{{ thumbnail.url }}"
+	     {% if player %}
+	     onclick="javascript:setPosition({{ player }}, {{ thumbnail.time }});"
+	     {% endif %}
+	/>
+      </td>
+      {% endfor %}
+    </tr>
+  </table>
+</div>
+
+<script language="javascript">
+  function setPosition (player, position) {
+//      if (!player.isPlaying()) {
+//          player.play();
+//      }
+      player.seek(position);
+  } 
+</script>

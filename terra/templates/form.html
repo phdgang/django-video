@@ -1,0 +1,6 @@
+<h3>Add a new video</h3>
+<form enctype="multipart/form-data" id="gform" name="gform" method="post" action="{% url upload %}">
+  {{ form.as_p|safe }}
+  <input type="submit" value="Upload">
+</form>
+

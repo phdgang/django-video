@@ -1,0 +1,48 @@
+{% load webdesign %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sample</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/screen.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/styles.css" />
+    <script type="text/javascript" src="/yvideo/flowplayer/flowplayer-3.0.0-rc2.min.js"></script>
+  </head>
+  <body>
+    <div id="header" class='container'> 
+      <div id="logo" class='column span-5'> 
+	<a href="/"><img src="/static/images/logo.gif"/></a>
+	<h1>django-video example</h1>
+      </div> 
+      <div id="main_menu" class='column last span-19'> 
+	{% block quick_upload %}
+	<div id="newvideo">
+	  {% include 'form.html' %}
+	</div>
+	{% endblock %}
+      </div> 
+    </div> 
+    <div class='container'> 
+      <div class='column span-17'> 
+	{% block content %}
+	{% endblock %}
+      </div> 
+      <div class='column span-7 last sidebar'> 
+	{% block sidebar %}
+	<h3>All videos</h3>
+	{% for vid in videos %}
+	<a href="{% url index %}?vid={{ vid.id }}"><img width="40%" src="/{{ vid.thumbnails.all.0.url }}" /></a>
+	{% endfor %}
+	{% endblock %}
+      </div> 
+    </div> 
+    <div id="footer" class='container'> 
+      <div class='column span-21'> 
+	footer
+      </div> 
+      <div class='column last span-3'> 
+	Copyright &copy; Y-NODE Software 2008.
+      </div> 
+    </div>
+  </body>
+</html>

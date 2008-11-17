@@ -1,0 +1,11 @@
+<script src='AC_RunActiveContent.js' language='javascript'></script>
+<script language='javascript'>
+ AC_FL_RunContent('codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0', 'width', '{{ width }}', 'height', '{{ height }}', 'src', ((!DetectFlashVer(9, 0, 0) && DetectFlashVer(8, 0, 0)) ? 'player8' : 'player'), 'pluginspage', 'http://www.macromedia.com/go/getflashplayer', 'id', 'flvPlayer', 'allowFullScreen', 'true', 'movie', ((!DetectFlashVer(9, 0, 0) && DetectFlashVer(8, 0, 0)) ? 'player8' : 'player'), 'FlashVars', 'movie={{ filename }}&bgcolor={{ background }}&fgcolor={{ foreground }}&volume={{ volume }}&autoplay={{ autoplay }}&autoload={{ autoload }}&mute={{ mute }}&autorewind={{ autorewind }}&loop={{ loop }}&muteonly={{ muteonly }}&clickurl={{ click_url }}&clicktarget={{ click_target }}');
+</script>
+<noscript>
+ <object width='{{ width }}' height='{{ height }}' id='flvPlayer'>
+  <param name='allowFullScreen' value='true'>
+  <param name='movie' value='player.swf?movie={{ filename }}&bgcolor={{ background }}&fgcolor={{ foreground }}&volume={{ volume }}&autoplay={{ autoplay }}&autoload={{ autoload }}&mute={{ mute }}&autorewind={{ autorewind }}&loop={{ loop }}&muteonly={{ muteonly }}&clickurl={{ click_url }}&clicktarget={{ click_target }}'>
+  <embed src='player.swf?movie={{ filename }}&bgcolor={{ background }}&fgcolor={{ foreground }}&volume={{ volume }}&autoplay={{ autoplay }}&autoload={{ autoload }}&mute={{ mute }}&autorewind={{ autorewind }}&loop={{ loop }}&muteonly={{ muteonly }}&clickurl={{ click_url }}&clicktarget={{ click_target }}' width='{{ width }}' height='{{ height }}' allowFullScreen='true' type='application/x-shockwave-flash'>
+ </object>
+</noscript>

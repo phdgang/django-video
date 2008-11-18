@@ -88,3 +88,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'terra.video'
 )
+
+
+if os.path.exists(os.path.join(os.path.dirname(__file__), 'settings_local.py')):
+    from settings_local import *

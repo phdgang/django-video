@@ -46,7 +46,7 @@ class Thumbnail(models.Model):
         return "%s/%s" % (tmp, thumb_dir)
 
     def url(self):
-        return self.image
+        return self.image.url
 
     def time(self):
         return self.position.seconds
@@ -90,7 +90,7 @@ class Video(models.Model):
 
     def url(self):
         if self.finished_encoding():
-            return self.encoded_video
+            return self.encoded_video.url
         else:
             return None
 

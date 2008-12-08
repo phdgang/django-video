@@ -17,7 +17,7 @@ from video.templatetags.type_transforms import transform
 
 register = template.Library()
 
-player_parameters = ['width', 'height', 'autoplay', 'volume', 'loop', 'mute', 'thumbnails']
+player_parameters = ['width', 'height', 'autoplay', 'volume', 'loop', 'mute', 'thumbnails', 'embed_code']
 
 def add_defaults(dict):
     result = dict

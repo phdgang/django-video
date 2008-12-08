@@ -20,9 +20,12 @@
   <tr><td>
       {% thumbnails video player="player" width=width %}
   </td></tr>
+  {% if embed_code %}
   <tr><td>
-      <textarea id="embed_code"></textarea>
-  </tr><td>
+      <h6>Embed code:</h6>
+      <textarea id="embed_code" style="width:{{ width }}px;height:200px" readonly></textarea>
+  </td></tr>
+  {% endif %}
   {% endif %}
   {% endif %}
 </table>
@@ -40,14 +43,19 @@
                           autoPlay: false,
                           {% endif %}
                       },
+                      {% if loop %}
+                      onBeforeFinish: function() {
+                          return false;
+                      },
+                      {% endif %}
                       onFinish: function() {
                           {% if loop %}
   
-                          this.play();
+                          this.play(0);
   
                           {% else %}
   
-                          this.stop();
+                          // this.stop();
   
                           {% endif %}
                       },
@@ -57,8 +65,10 @@
                           this.mute();
                           {% endif %}
 
+                          {% if embed_code %}
                           this.embed();
                           $('embed_code').innerHTML = this.getEmbedCode()
+                          {% endif %}
                       }
                       });
 </script>

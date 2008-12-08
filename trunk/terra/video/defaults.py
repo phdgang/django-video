@@ -5,6 +5,7 @@ PLAYER_AUTOPLAY = False
 PLAYER_LOOP = False
 PLAYER_MUTE = False
 PLAYER_THUMBNAILS = False
+PLAYER_EMBED_CODE = True
 
 VIDEO_DIR = "video/%Y/%m/%d/"
 TEMP_VIDEO_DIR = "video"

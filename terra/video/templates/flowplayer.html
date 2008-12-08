@@ -1,5 +1,8 @@
 {% load thumbnails %}
 
+<script type="text/javascript" src="/static/js/flowplayer.embed-3.0.0.min.js"></script>
+<script type="text/javascript" src="/static/js/prototype.js"></script>
+
 <table>
   <tr><td>
       <a  
@@ -16,6 +19,9 @@
   <tr><td>
       {% thumbnails video player="player" width=width %}
   </td></tr>
+  <tr><td>
+      <textarea id="embed_code"><textares>
+  </tr><td>
   {% endif %}
   {% endif %}
 </table>
@@ -49,6 +55,9 @@
                           {% if mute %}
                           this.mute();
                           {% endif %}
+
+                          this.embed();
+                          $('embed_code').innerHTML = this.getEmbedCode()
                       }
                       });
 </script>

@@ -55,7 +55,11 @@ THUMBNAIL_DIR - the name of directory for thumbnails in every video directory
 Debug options:
 LOG_FUNCTION - function which is used to log on errors. 
 
+Templatetags.
 
+To embed a player in your page you should make use of `player` templatetag. Possible parameters to
+this templatetag are: width, height, autoplay, volume, loop, mute, thumbnails, embed_code. Meaning
+of this parameters is quite obvious.
 
 Bugs and issues.
 

@@ -73,7 +73,7 @@ Parameters to templatetag a provided as following:
 To embed a player in your page you should make use of `player` templatetag. Possible parameters to this templatetag are: `width`, `height`, `autoplay`, `volume`, `loop`, `mute`, `thumbnails`, `embed_code`. Meaning of this parameters is quite obvious.
 
 == Thumbnails templatetag ==
-You can display thumbnails of the certain video `separately from player. To fulfill that goal you can use `thumbnails` templattag. It understands only two parameters: `width`, `player`. The latter is the name of javascript variable representing player. You can use this parameter if you want for user to have a possibility of jumping through the movie just by clicking on thumbnails.
+You can display thumbnails of the certain video separately from player. To fulfill that goal you can use `thumbnails` templattag. It understands only two parameters: `width`, `player`. The latter is the name of javascript variable representing player. You can use this parameter if you want for user to have a possibility of jumping through the movie just by clicking on thumbnails.
 
 = Bugs and issues =
 

@@ -26,6 +26,5 @@ THUMBNAIL_DIR = "thumbnails"
 
 import sys
 
-DEBUG = True
 LOG_FUNCTION = lambda x: sys.stdout.write("%s\n" % x)
 STOP_ON_ERRORS = True

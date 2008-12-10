@@ -1,0 +1,66 @@
+Requirements:
+  * mencoder
+  * mtn (movie thumbnailer)
+  * python imaging library
+  * python-magic
+  * parallel python
+  * yamdi
+
+Configuration.
+
+In the `default.py` file all default values for parameters which can be altered. To specify your
+own value for any of parameters you should define new value in your `settings.py` adding 'TERRA_'
+prefix to the name of paramter. For instance, if you wanted to change video encoding bitrate you
+would add something like 'TERRA_ENCODING_VBITRATE = 1000' to your `settings.py` file.
+
+Brief explanation of parameters meaning.
+
+PLAYER_WIDTH, PLAYER_HEIGHT - default width and height of player
+PLAYER_VOLUME - default volume (per cents)
+PLAYER_AUTOPLAY - whether playback should begin right after page loading
+PLAYER_LOOP - whether player have to loop movie playback: 
+PLAYER_MUTE - whether player will be muted by default
+PLAYER_THUMBNAILS - whether movie thumbnails should be displayed along with player
+PLAYER_EMBED_CODE - whether player embed code should be displayed: 
+
+VIDEO_DIR - directory in which video is stored. Time formatting can be used as usual.
+TEMP_VIDEO_DIR - directory for temporary video files
+
+Encoding related parameters:
+
+ENCODING_AFREQ - audio frequency
+ENCODING_ABITRATE - audio bitrate
+ENCODING_FRAMERATE - video framerate
+ENCODING_VBITRATE - video bitrate
+ENCODING_WIDTH - encoded video width
+ENCODING_HEIGHT - encoded video height
+ENCODING_LOG_FILE - encoding log file. This file is separate for every video. If you do not want to
+have this type of log you can specify '/dev/null' on Unix system or possibly 'nul' on Windows (the
+latter was not tested). For some videos this file can become unreasonably big so it can safely be
+deleted after encoding using `clean_auxiliarry_files` method of video object.
+
+Thumbnail generation related parameters:
+
+THUMBNAIL_TIMESTEP - this specifies an interval of time between two thumbnails
+THUMBNAIL_WIDTH - this parameters can be used to resize thumbnails (keeping aspect) to the specified
+width. If it's `None` (which is default) then thumbnails are of the video size.
+THUMBNAIL_MINIMUM_NUMBER - this defines the minimum quantity of thumbnails to be generated. So you
+will have at least THUMBNAIL_MINIMUM_NUMBER of thumbnails for every video which is useful for tiny
+videos with duration less then THUMBNAIL_TIMESTEP * THUMBNAIL_MINIMUM_NUMBER.
+THUMBNAIL_LOG_FILE - the save as ENCODING_LOG_FILE but for thumbnails. And it does not have a size
+issue.
+THUMBNAIL_DIR - the name of directory for thumbnails in every video directory
+
+
+Debug options:
+LOG_FUNCTION - function which is used to log on errors. 
+
+
+
+Bugs and issues.
+
+In order to generate thumbnails our application uses mtn. But mtn in some cases may be imprecise in
+detecting a position of thumbnail in a movie. So jumping to the certain place in a video by clicking
+on thumbnails sometimes is buggy either.
+
+

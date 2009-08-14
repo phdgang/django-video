@@ -72,13 +72,14 @@ class Thumbnail(models.Model):
 
 class VideoManager(models.Manager):
     def encoded(self):
-        return self.get_query_set().filter(_finished_encoding=True)
+        return self.get_query_set().filter(finished_encoding=True)
 
 class Video(models.Model):
     video = DynamicUploadFileField(null=False, upload_to=TEMP_VIDEO_DIR,
                                    signal=lambda x: post_upload.send(sender=Video, instance=x))
     encoded_video = models.FileField(default=None, upload_to=TEMP_VIDEO_DIR)
-    _finished_encoding = models.BooleanField(default=False, null=None)
+    length = models.IntegerField(default=0, blank=True)
+    finished_encoding = models.BooleanField(default=False, null=None)
     upload_dir = models.FilePathField(null=True, default=None)
     upload_date = models.DateTimeField(auto_now_add=True)
 
@@ -88,8 +89,9 @@ class Video(models.Model):
     def __unicode__(self):
         return self.video.url
 
+    @property
     def url(self):
-        if self.finished_encoding():
+        if self.finished_encoding:
             return self.encoded_video.url
         else:
             return None
@@ -118,7 +120,7 @@ class Video(models.Model):
             pre_upload.send(sender=Video, instance=self)
 
     def clean_auxiliarry_files(self):
-        if self.finished_encoding():
+        if self.finished_encoding:
             video_dir = os.path.abspath(os.path.dirname(self.encoded_video.path))
             enc_logfile = get_setting('encoding_log_file')
             if enc_logfile:
@@ -134,9 +136,6 @@ class Video(models.Model):
                     os.remove(os.path.join(thumbnail_dir, thumbnail_logfile))
                 except:
                     pass
-
-    def finished_encoding(self):
-        return self._finished_encoding
 
     def has_thumbnails(self):
         return self.thumbnails.count() > 0
@@ -158,7 +157,7 @@ class Video(models.Model):
 
     def _set_encoded_video(self, encoded_video_path):
         self.encoded_video = self._remove_media_root_prefix(encoded_video_path)
-        self._finished_encoding = True
+        self.finished_encoding = True
         self.save()
 
     def _set_thumbnails(self, thumbnails):

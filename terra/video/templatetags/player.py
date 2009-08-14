@@ -2,11 +2,18 @@
 Copyright (C) 2008 Y-NODE Software
 Author: Aleksey Artamonov <aleksey.artamonov@y-node.com>
 
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+Place, Suite 330, Boston, MA 02111-1307 USA
 """
 
 from django import template
@@ -17,7 +24,8 @@ from video.templatetags.type_transforms import transform
 
 register = template.Library()
 
-player_parameters = ['width', 'height', 'autoplay', 'volume', 'loop', 'mute', 'thumbnails', 'embed_code']
+player_parameters = [ 'width', 'height', 'autoplay', 'volume',
+                      'loop', 'mute', 'thumbnails', 'embed_code' ]
 
 def add_defaults(dict):
     result = dict
@@ -28,8 +36,9 @@ def add_defaults(dict):
 
     return result
 
-# {% player file width=width height=height background=background foreground=foreground volume=volume
-#                autoplay= autorewind= loop= muteonly= mute= click_url= click_target= %}
+# {% player file width=width height=height background=background
+#                foreground=foreground volume=volume autoplay= autorewind= loop=
+#                muteonly= mute= click_url= click_target= %}
 @register.tag(name="player")
 def do_player(parser, token):
     try:
@@ -45,9 +54,11 @@ def do_player(parser, token):
         add_defaults(info_dict)
         info_dict['video'] = video
     except IndexError:
-        raise template.TemplateSyntaxError, "%r tag requires at least one argument" % tag_name
+        raise template.TemplateSyntaxError, \
+                "%r tag requires at least one argument" % tag_name
     except ValueError:
-        raise template.TemplateSyntaxError, "Extra arguments of %r tag must be in the form \"parameter=value\"" % tag_name
+        raise template.TemplateSyntaxError, \
+                "Extra arguments of %r tag must be in the form \"parameter=value\"" % tag_name
 
     return PlayerNode(info_dict)
 
@@ -66,4 +77,4 @@ class PlayerNode(template.Node):
 
             self.options[parameter] = actual_value
 
-        return render_to_string("flowplayer.html", self.options)
+        return render_to_string("video/flowplayer.html", self.options)

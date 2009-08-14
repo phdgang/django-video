@@ -25,8 +25,9 @@ def process_jobs(sender, **kwargs):
     video.encoder.ENCODER_JOB.schedule((path, output), callback=post_encode,
                                        callbackargs=(instance,))
 
-def post_encode(instance, encoded_video_path):
+def post_encode(instance, (length, encoded_video_path)):
     if encoded_video_path:
+        instance.length = length
         instance._set_encoded_video(encoded_video_path)
         make_thumbnails(instance, encoded_video_path)
 

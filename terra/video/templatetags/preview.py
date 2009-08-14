@@ -9,7 +9,7 @@ def random_thumbnail(video):
 
     return video.thumbnails.all()[randint(0, count - 1)]
 
-@register.inclusion_tag('preview.html', takes_context=False)
+@register.inclusion_tag('video/preview.html', takes_context=False)
 def preview(video, width="100%"):
     thumbnail = None
     if video.has_thumbnails():

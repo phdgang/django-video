@@ -11,6 +11,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 import pp
 import os
+import re
+import os.path
 import shutil
 import video.config
 from video.job import Job
@@ -28,7 +30,7 @@ def settings_dict():
         if setting in special_parameters:
             handler = special_parameters[setting]
             value = handler(value)
-            
+
         result[setting] = value
 
     return result
@@ -62,13 +64,23 @@ trell:v4mv:cbp:last_pred=3 \
                 log("[encoding] Command returned exitcode %d" % exitcode)
                 return None
 
-        return inject_metadata(output_path)
+        length = 0
+
+        log_file = os.path.join(settings['dir'], settings['log_file'])
+        l_re     = re.compile(r'^Video.*?(\d+)\.\d+ secs.*$')
+        for l in file(log_file).xreadlines():
+            match = l_re.match(l)
+            if match:
+                length = int(match.group(1))
+                break
+
+        return length, inject_metadata(output_path)
     else:
         if stop_on_errors:
             raise IOError, "%s doesn't exists" % path
         else:
             log("[encoding] %s doesn't exists" % path)
-            return None
+            return (None, None)
 
 def inject_metadata(path):
     YAMDI_CMD = "yamdi -i %(input)s -o %(output)s"

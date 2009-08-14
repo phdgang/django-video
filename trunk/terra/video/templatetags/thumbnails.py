@@ -67,4 +67,4 @@ class ThumbnailsNode(template.Node):
 
             self.options[parameter] = actual_value
 
-        return render_to_string("thumbnails.html", self.options)
+        return render_to_string("video/thumbnails.html", self.options)

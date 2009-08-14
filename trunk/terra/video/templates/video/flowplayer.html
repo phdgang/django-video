@@ -1,0 +1,64 @@
+{% load thumbnails %}
+
+<script type="text/javascript"
+        src="/static/js/tools.flashembed-1.0.3.min.js">
+</script>
+<script type="text/javascript"
+        src="/static/js/flowplayer.embed-3.0.2.min.js">
+</script>
+
+<a style="display:block;width:{{ width }}px;height:{{ height }}px"  
+   id="player">
+  {% if not video.url %}
+    <img src="/static/images/not_available.jpg"
+         alt="Video is not available yet"
+         height={{ height }} width={{ width }}/>
+  {% endif %}
+</a>
+
+<script>
+  var player = flowplayer(
+    "player",
+    "/static/flash/flowplayer-3.1.1.swf",
+    {
+      clip: {
+        {% if video.url %}
+          url: "/static/{{ video.url }}",
+        {% endif %}
+        {% if autoplay %}
+          autoPlay: true,
+        {% else %}
+          autoPlay: false,
+        {% endif %}
+      },
+
+      {% if loop %}
+        onBeforeFinish: function() {
+          return false;
+        },
+      {% endif %}
+
+      onFinish: function() {
+        {% if loop %}
+          this.play(0);
+        {% else %}
+          // this.stop();
+        {% endif %}
+      },
+
+      onLoad: function() {
+        var player = this;
+
+        player.setVolume({{ volume }});
+        {% if mute %}
+          player.mute();
+        {% endif %}
+
+        player.embed();
+        $(document).ready( function() {
+                             $('#embed_code').val(player.getEmbedCode().replace(/&lt;/ig, "<").replace(/&gt;/ig, ">"));
+                           } );
+      }
+    }
+  );
+</script>

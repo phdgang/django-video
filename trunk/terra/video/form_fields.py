@@ -55,10 +55,10 @@ class VideoField(FileField):
 
             if file:
                 if not is_video(file):
-                    raise ValidationError("")
+                    raise ValidationError("1")
             elif buffer:
                 if not is_video_buffer(buffer):
-                    raise ValidationError("")
+                    raise ValidationError("2")
             else:
                 raise Exception("Can't get uploaded file's contents in usual way. Weird :(")
         except ValidationError:

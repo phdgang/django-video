@@ -8,7 +8,7 @@
 </script>
 
 <a style="display:block;width:{{ width }}px;height:{{ height }}px"  
-   id="player">
+   id="player-{{ video.pk }}">
   {% if not video.url %}
     <img src="/static/images/not_available.jpg"
          alt="Video is not available yet"
@@ -18,12 +18,12 @@
 
 <script>
   var player = flowplayer(
-    "player",
+    "player-{{ video.pk }}",
     "/static/flash/flowplayer-3.1.1.swf",
     {
       clip: {
         {% if video.url %}
-          url: "/static/{{ video.url }}",
+          url: "{{ video.url }}",
         {% endif %}
         {% if autoplay %}
           autoPlay: true,
